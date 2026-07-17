@@ -1,17 +1,23 @@
 :root {
-  --paper: #faf7f2;
-  --paper-card: #ffffff;
-  --ink: #3d3a4a;
-  --ink-strong: #221f2b;
-  --ink-soft: #8b8698;
-  --border: #e6e0d6;
-  --accent: #b06b4a;
-  --accent-soft: rgba(176, 107, 74, 0.12);
-  --focus: #7a6bb0;
-  --shadow: 0 2px 10px rgba(60, 50, 40, 0.06);
+  --paper: #f7f2e8;
+  --paper-card: #fffdf7;
+  --paper-soft: #fbf7ef;
+  --ink: #403a35;
+  --ink-strong: #34302b;
+  --ink-soft: #756d65;
+  --border: #ded4c5;
+  --accent: #b97865;
+  --accent-soft: #ead7ce;
+  --focus: #b97865;
+  --focus-ring: rgba(185, 120, 101, 0.14);
+  --shadow: 0 2px 12px rgba(76, 62, 48, 0.1);
 
-  color-scheme: light dark;
-  font: 17px/1.6 'Iowan Old Style', 'Palatino Linotype', Georgia, 'Segoe UI', serif;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  color-scheme: light;
+  font: 16px/1.6 var(--font-sans);
+  letter-spacing: 0.01em;
   color: var(--ink);
   background: var(--paper);
   font-synthesis: none;
@@ -20,45 +26,39 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #1c1a22;
-    --paper-card: #262330;
-    --ink: #d9d5e0;
-    --ink-strong: #f2f0f6;
-    --ink-soft: #918da0;
-    --border: #38344188;
-    --accent: #d99a78;
-    --accent-soft: rgba(217, 154, 120, 0.14);
-    --focus: #b3a4e6;
-    --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-  }
-}
+/* "Systeem" volgt bewust niet het OS-kleurenschema: de app toont
+   standaard het lichte boekontwerp. Donker blijft beschikbaar via een
+   expliciete keuze in Instellingen (data-theme="dark" hieronder). */
 
 :root[data-theme='light'] {
-  --paper: #faf7f2;
-  --paper-card: #ffffff;
-  --ink: #3d3a4a;
-  --ink-strong: #221f2b;
-  --ink-soft: #8b8698;
-  --border: #e6e0d6;
-  --accent: #b06b4a;
-  --accent-soft: rgba(176, 107, 74, 0.12);
-  --focus: #7a6bb0;
-  --shadow: 0 2px 10px rgba(60, 50, 40, 0.06);
+  --paper: #f7f2e8;
+  --paper-card: #fffdf7;
+  --paper-soft: #fbf7ef;
+  --ink: #403a35;
+  --ink-strong: #34302b;
+  --ink-soft: #756d65;
+  --border: #ded4c5;
+  --accent: #b97865;
+  --accent-soft: #ead7ce;
+  --focus: #b97865;
+  --focus-ring: rgba(185, 120, 101, 0.14);
+  --shadow: 0 2px 12px rgba(76, 62, 48, 0.1);
 }
 
 :root[data-theme='dark'] {
   --paper: #1c1a22;
   --paper-card: #262330;
+  --paper-soft: #2c2938;
   --ink: #d9d5e0;
   --ink-strong: #f2f0f6;
   --ink-soft: #918da0;
   --border: #38344188;
   --accent: #d99a78;
   --accent-soft: rgba(217, 154, 120, 0.14);
-  --focus: #b3a4e6;
+  --focus: #d99a78;
+  --focus-ring: rgba(217, 154, 120, 0.18);
   --shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
 }
 
 * {
@@ -70,6 +70,7 @@ body {
 }
 
 h1, h2 {
+  font-family: var(--font-serif);
   color: var(--ink-strong);
   font-weight: 600;
 }
@@ -85,28 +86,30 @@ textarea, input {
 }
 
 .app-shell {
-  max-width: 720px;
+  max-width: 820px;
   margin: 0 auto;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 72px;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
 }
 
 .app-header {
-  padding: 24px 20px 8px;
+  padding: 24px 24px 4px;
 }
 
 .app-title {
-  font-size: 22px;
+  font-family: var(--font-sans);
+  font-size: 15px;
   font-weight: 600;
-  color: var(--ink-strong);
-  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .app-main {
   flex: 1;
-  padding: 8px 20px 32px;
+  padding: 4px 24px 32px;
 }
 
 .nav-bar {
@@ -119,8 +122,9 @@ textarea, input {
   gap: 4px;
   background: var(--paper-card);
   border-top: 1px solid var(--border);
-  padding: 10px max(12px, calc(50% - 360px));
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+  padding: 10px max(12px, calc(50% - 410px));
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  box-shadow: 0 -2px 10px rgba(76, 62, 48, 0.05);
 }
 
 .nav-link {
@@ -132,6 +136,7 @@ textarea, input {
   color: var(--ink-soft);
   text-decoration: none;
   font-size: 13px;
+  font-weight: 500;
   transition: background 0.15s, color 0.15s;
 }
 
@@ -142,15 +147,16 @@ textarea, input {
 }
 
 .page-date {
-  font-size: 26px;
-  margin: 8px 0 24px;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 10px 0 28px;
   text-transform: capitalize;
 }
 
 .card {
   background: var(--paper-card);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 18px;
   padding: 20px;
   margin-bottom: 18px;
   box-shadow: var(--shadow);
@@ -164,39 +170,53 @@ textarea, input {
 }
 
 .card-question {
+  font-family: var(--font-serif);
+  font-weight: 600;
   font-size: 17px;
   line-height: 1.5;
   color: var(--ink-strong);
   margin: 0 0 12px;
+  overflow-wrap: break-word;
 }
 
 .card-icon {
-  margin-right: 8px;
+  display: inline-block;
+  width: 1.4em;
+  margin-right: 4px;
+  text-align: center;
 }
 
 .card-textarea {
   width: 100%;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  background: transparent;
+  border-radius: 12px;
+  background: var(--paper-soft);
   color: var(--ink);
   padding: 12px 14px;
+  font-family: var(--font-sans);
+  font-weight: 400;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
   resize: vertical;
   min-height: 72px;
+}
+
+.card-textarea::placeholder {
+  color: var(--ink-soft);
 }
 
 .card-textarea:focus {
   outline: none;
   border-color: var(--focus);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .saved-indicator {
   display: block;
-  min-height: 16px;
-  font-size: 12px;
+  min-height: 14px;
+  font-size: 11px;
   color: var(--ink-soft);
+  opacity: 0.85;
   margin-top: 6px;
   text-align: right;
 }
@@ -238,6 +258,7 @@ textarea, input {
   padding: 6px 2px;
   color: var(--ink);
   font-size: 15px;
+  font-weight: 500;
   text-align: left;
 }
 
@@ -258,6 +279,7 @@ textarea, input {
 }
 
 .timer-display {
+  font-family: var(--font-serif);
   font-size: 28px;
   font-variant-numeric: tabular-nums;
   color: var(--ink-strong);
@@ -300,14 +322,16 @@ textarea, input {
   display: block;
   background: var(--paper-card);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 14px 18px;
   text-decoration: none;
   color: inherit;
+  box-shadow: var(--shadow);
 }
 
 .history-date {
   display: block;
+  font-family: var(--font-serif);
   font-size: 15px;
   font-weight: 600;
   color: var(--ink-strong);
@@ -344,6 +368,7 @@ textarea, input {
   border-radius: 999px;
   padding: 8px 16px;
   color: var(--ink-soft);
+  font-weight: 500;
 }
 
 .category-tab.active {
@@ -365,9 +390,10 @@ textarea, input {
 .library-item {
   background: var(--paper-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 14px 16px;
   color: var(--ink);
+  box-shadow: var(--shadow);
 }
 
 .library-item-multiline {
@@ -390,19 +416,21 @@ textarea, input {
   border: 1px solid var(--border);
   background: var(--paper-card);
   color: var(--ink);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 10px 16px;
+  font-weight: 500;
 }
 
 .theme-option.active {
   border-color: var(--accent);
   color: var(--accent);
+  background: var(--accent-soft);
   font-weight: 600;
 }
 
 .danger-button {
-  color: #b0483f;
-  border-color: #b0483f66 !important;
+  color: #a85a45;
+  border-color: #a85a4566 !important;
 }
 
 .hidden-file-input {
@@ -419,7 +447,7 @@ textarea, input {
     padding: 18px 16px 4px;
   }
   .app-main {
-    padding: 8px 16px 24px;
+    padding: 4px 16px 24px;
   }
   .card {
     padding: 16px;
